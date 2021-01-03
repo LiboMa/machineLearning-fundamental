@@ -4,8 +4,8 @@
     Neuroal Networks from Scratch. 
 
 ## Reference links:
- - https://www.youtube.com/watch?v=omz_NdFgWyU
- - (Data Sets creation)[https://cs231n.github.io/neural-networks-case-study/]
+ - [build neural network from scratch in Python](https://www.youtube.com/watch?v=omz_NdFgWyU)
+ - [Data Sets creation](https://cs231n.github.io/neural-networks-case-study/)
 
 
 
