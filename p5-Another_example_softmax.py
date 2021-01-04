@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-
 # follow the link -> https://cs231n.github.io/neural-networks-case-study/
 
 # to fixed the random number
@@ -58,6 +57,9 @@ class Activation_ReLU:
     def forward(self, inputs):
         self.output = np.maximum(0, inputs)
 
+class Activation_Softmax:
+    def forward(self, inputs):
+        self.output = np.exp(inputs - np.max(inputs))
 
 number_of_neuron = 2
 
@@ -82,14 +84,29 @@ layer1.forward(data_sets)
 # make each value to positive e.g. > 0
 activation1.forward(layer1.output)
 
-print(activation1.output)
+#print(activation1.output)
 
-#layer2 = Layer_Dense(number_of_neuron, 2)
-#
-#layer1.forward(X)
-#print(layer1.output)
-#
-#layer2.forward(layer1.output)
-#
-#print(layer2.output)
-##print(layer1_output, "\n", layer2_output)
+layer_outputs = [
+        [4.8, 1.21, 2.385],
+        [8.9, -1.81, 0.2],
+        [1.41, -1.051, -0.026]
+        ]
+
+# E = 2.71282182846
+E = math.e 
+
+exp_values = np.exp(layer_outputs - np.max(layer_outputs))
+#print(np.sum(layer_outputs, axis=1))
+#print(np.sum(layer_outputs, axis=1, keepdims=True))
+print(exp_values)
+norm_values = exp_values / np.sum(exp_values)
+print(norm_values)
+
+
+# going with deal with normalization(mean normalization, feature scaling)
+#norm_base = sum(exp_values)
+#norm_values = []
+#for value in exp_values:
+#    norm_values.append(value/norm_base)
+#print(norm_values)
+#print(sum(norm_values))

@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-
 # follow the link -> https://cs231n.github.io/neural-networks-case-study/
 
 # to fixed the random number
@@ -58,13 +57,19 @@ class Activation_ReLU:
     def forward(self, inputs):
         self.output = np.maximum(0, inputs)
 
+class Activation_Softmax:
+    def forward(self, inputs):
+        exp_values = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
+        # axis=1, max by row, axis=0, max by columns, keepdims, convert to vector
+        # axis=1, sum by row, axis=0, sum by columns, keepdims, convert to vector
+        probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
+        self.output = probabilities
 
 number_of_neuron = 2
 
 # generate 3 classification points in the image
-X, y = create_data(100, 3)
-data_sets, labels = create_data(100, 3)
-print(data_sets.shape[1])
+#X, y = create_data(100, 3)
+samples, classes= create_data(100, 3)
 
 import matplotlib.pyplot as plt
 
@@ -73,23 +78,16 @@ import matplotlib.pyplot as plt
 #plt.show()
 
 # data_sets has (300, 2), 2 features for each data set
-layer1 = Layer_Dense(data_sets.shape[1], number_of_neuron)
-
+dense1= Layer_Dense(samples.shape[1], number_of_neuron)
 activation1 = Activation_ReLU()
-
-layer1.forward(data_sets)
-#print(layer1.output)
+dense2= Layer_Dense(number_of_neuron, 3)
+activation2 = Activation_Softmax()
 # make each value to positive e.g. > 0
-activation1.forward(layer1.output)
+dense1.forward(samples)
+activation1.forward(dense1.output)
 
-print(activation1.output)
+dense2.forward(activation1.output)
+activation2.forward(dense2.output)
 
-#layer2 = Layer_Dense(number_of_neuron, 2)
-#
-#layer1.forward(X)
-#print(layer1.output)
-#
-#layer2.forward(layer1.output)
-#
-#print(layer2.output)
-##print(layer1_output, "\n", layer2_output)
+print(activation2.output[:5])
+
