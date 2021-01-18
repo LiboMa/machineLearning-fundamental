@@ -3,6 +3,11 @@ import math
 import matplotlib.pyplot as plt
 from scipy import stats
  
+class capa():
+  def __init__(self, n_neuronas_capa_anterior, n_neuronas, funcion_act):
+    self.funcion_act = funcion_act
+    self.b  = np.round(stats.truncnorm.rvs(-1, 1, loc=0, scale=1, size= n_neuronas).reshape(1,n_neuronas),3)
+    self.W  = np.round(stats.truncnorm.rvs(-1, 1, loc=0, scale=1, size= n_neuronas * n_neuronas_capa_anterior).reshape(n_neuronas_capa_anterior,n_neuronas),3)
 
 def mse(Ypredich, Yreal):
     # calcula mos el error
@@ -70,14 +75,8 @@ sigmoid = (
   lambda x:x * (1 - x)
   )
 
-class capa():
-  def __init__(self, n_neuronas_capa_anterior, n_neuronas, funcion_act):
-    self.funcion_act = funcion_act
-    self.b  = np.round(stats.truncnorm.rvs(-1, 1, loc=0, scale=1, size= n_neuronas).reshape(1,n_neuronas),3)
-    self.W  = np.round(stats.truncnorm.rvs(-1, 1, loc=0, scale=1, size= n_neuronas * n_neuronas_capa_anterior).reshape(n_neuronas_capa_anterior,n_neuronas),3)
-
 neuronas = [2,4,8,1] 
-funciones_activacion = [relu,relu, sigmoid]
+funciones_activacion = [relu, relu, sigmoid]
 red_neuronal = []
 
 X =  np.round(np.random.randn(20,2),3)

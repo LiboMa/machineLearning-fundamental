@@ -11,6 +11,7 @@ import math
 #    [0.5,-2.0, -1.5, 1.1],
 #    ])
 #
+
 def create_data(points, classes):
     X = np.zeros((points*classes, 2))
     y = np.zeros(points*classes, dtype='uint8')
@@ -22,26 +23,6 @@ def create_data(points, classes):
         y[ix] = class_number
 
     return X, y
-
-#inputs = [0, 2, -1, 3.3, -2.7, 1.1, 2.2, -100]
-
-# simulate for ReLU function
-# 1. x x >0 , y=x
-# 2. 0, x<=0, y=0
-
-#def ReLU(output):
-#    output = []
-#    for i in inputs:
-#        output.append(max(0, i))
-#        '''
-#        if i > 0:
-#            output.append(i)
-#        else:
-#            output.append(0)
-#        '''
-#    return output
-#
-#print(ReLU(inputs))
 
 class Layer_Dense:
 
@@ -94,19 +75,9 @@ layer_outputs = [
 
 # E = 2.71282182846
 E = math.e 
-
 exp_values = np.exp(layer_outputs - np.max(layer_outputs))
-#print(np.sum(layer_outputs, axis=1))
-#print(np.sum(layer_outputs, axis=1, keepdims=True))
 print(exp_values)
 norm_values = exp_values / np.sum(exp_values)
 print(norm_values)
 
 
-# going with deal with normalization(mean normalization, feature scaling)
-#norm_base = sum(exp_values)
-#norm_values = []
-#for value in exp_values:
-#    norm_values.append(value/norm_base)
-#print(norm_values)
-#print(sum(norm_values))

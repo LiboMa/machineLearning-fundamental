@@ -126,7 +126,7 @@ Y = [0] * 10 + [1] * 10
 shuffle(Y)
 Y = np.array(Y).reshape(len(Y),1)
  
-print(Y)
+print("===>", Y)
 predict = mse(output[-1], Y)
 
 print("deviation of cost function", predict[0])
@@ -152,7 +152,7 @@ red_neuronal[-1].W = red_neuronal[-1].W - (output[-1].T @ x) * 0.01
 print("b of the last layer's result", red_neuronal[-1].b)
 print("W of the last layer's result", red_neuronal[-1].W)
 #
-sys.exit(0)
+# sys.exit(0)
 
 ## put all calculate together with for each layer
 
@@ -191,7 +191,6 @@ for capa in back:
 
 print('MSE: ' + str(mse(output[-1],Y)[0]) )
 print('Estimation: ' + str(output[-1]) )
-
 
 ## trying out neural network 
 
@@ -293,12 +292,12 @@ for paso in list(range(len(neuronas)-1)):
   red_neuronal.append(x) 
 
 error = []
-predicciones = []
+predictions = []
 
 for epoch in range(0,200):
   ronda = entrenamiento(X = X ,Y = Y ,red_neuronal = red_neuronal, lr = 0.001)
-  predicciones.append(ronda)
-  temp = mse(np.round(predicciones[-1]),Y)[0]
+  predictions.append(ronda)
+  temp = mse(np.round(predictions[-1]),Y)[0]
   error.append(temp)
 
 epoch = list(range(0,200))

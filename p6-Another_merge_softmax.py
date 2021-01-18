@@ -23,25 +23,6 @@ def create_data(points, classes):
 
     return X, y
 
-#inputs = [0, 2, -1, 3.3, -2.7, 1.1, 2.2, -100]
-
-# simulate for ReLU function
-# 1. x x >0 , y=x
-# 2. 0, x<=0, y=0
-
-#def ReLU(output):
-#    output = []
-#    for i in inputs:
-#        output.append(max(0, i))
-#        '''
-#        if i > 0:
-#            output.append(i)
-#        else:
-#            output.append(0)
-#        '''
-#    return output
-#
-#print(ReLU(inputs))
 
 class Layer_Dense:
 
@@ -65,8 +46,12 @@ class Activation_Softmax:
         probabilities = exp_values / np.sum(exp_values, axis=1, keepdims=True)
         self.output = probabilities
 
-number_of_neuron = 2
 
+
+
+
+
+number_of_neuron = 2
 # generate 3 classification points in the image
 #X, y = create_data(100, 3)
 samples, classes= create_data(100, 3)
@@ -80,14 +65,19 @@ import matplotlib.pyplot as plt
 # data_sets has (300, 2), 2 features for each data set
 dense1= Layer_Dense(samples.shape[1], number_of_neuron)
 activation1 = Activation_ReLU()
-dense2= Layer_Dense(number_of_neuron, 3)
+
+dense2= Layer_Dense(number_of_neuron, 8)
 activation2 = Activation_Softmax()
+
 # make each value to positive e.g. > 0
 dense1.forward(samples)
 activation1.forward(dense1.output)
+print(activation1.output[:5])
 
 dense2.forward(activation1.output)
 activation2.forward(dense2.output)
 
 print(activation2.output[:5])
 
+
+# Back propatation 
